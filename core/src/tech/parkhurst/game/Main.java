@@ -72,10 +72,11 @@ public class Main extends ApplicationAdapter {
 			bucket.x = 0;
 		}else if(bucket.x > 1280 - 64){
 			bucket.x = 1280 - 64;
-		}else if(bucket.y<0){
+		}
+		if(bucket.y<0){
 			bucket.y = 0;
-		}else if(bucket.y > 1280-64){
-			bucket.y= 1280-4;
+		}else if(bucket.y > 720-64){
+			bucket.y= 720-64;
 		}
 
 	}
@@ -83,6 +84,8 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-
+		bucketImg.dispose();;
+		rainMusic.dispose();
+		dropSound.dispose();
 	}
 }
