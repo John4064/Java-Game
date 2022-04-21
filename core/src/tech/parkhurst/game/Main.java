@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 // add this import and NOT the one in the standard library
 import com.badlogic.gdx.math.Rectangle;
@@ -52,9 +53,31 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 255, 0, 1);
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-
+		batch.draw(bucketImg, bucket.x, bucket.y);
 		batch.end();
+
+		//Movement
+		if(Gdx.input.isTouched()) {
+			Vector3 touchPos = new Vector3();
+			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+			camera.unproject(touchPos);
+			bucket.x = touchPos.x - 64 / 2;
+			bucket.y = touchPos.y - 64/2;
+		}
+		//System.out.println(Gdx.graphics.getFramesPerSecond());
+		if(bucket.x < 0){
+			bucket.x = 0;
+		}else if(bucket.x > 1280 - 64){
+			bucket.x = 1280 - 64;
+		}else if(bucket.y<0){
+			bucket.y = 0;
+		}else if(bucket.y > 1280-64){
+			bucket.y= 1280-4;
+		}
+
 	}
 	
 	@Override
