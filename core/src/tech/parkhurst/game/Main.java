@@ -19,7 +19,7 @@ public class Main extends ApplicationAdapter {
 	private Texture drop;
 	private Sound dropSound;
 	private Music rainMusic;
-	private Music gameMusic;
+	private Sound gameMusic;
 
 	private Rectangle bucket;
 
@@ -33,7 +33,7 @@ public class Main extends ApplicationAdapter {
 		drop = new Texture("./drop.png");
 		dropSound = Gdx.audio.newSound(Gdx.files.internal("raindrop.wav"));
 		rainMusic = Gdx.audio.newMusic(Gdx.files.internal("undertree.mp3"));
-		gameMusic = Gdx.audio.newMusic(Gdx.files.internal(("gameMusic.wav")));
+		//gameMusic = Gdx.audio.newSound(Gdx.files.internal("gameMusic.wav"));
 		//Bucket
 		bucket = new Rectangle();
 		bucket.x = 800 / 2 - 64 / 2;
@@ -45,9 +45,9 @@ public class Main extends ApplicationAdapter {
 
 
 		// start the playback of the background music immediately
-		gameMusic.setLooping(true);
-		gameMusic.play();
-		gameMusic.setVolume(1);
+		rainMusic.setLooping(true);
+		rainMusic.play();
+		rainMusic.setVolume(1);
 	}
 
 	@Override
