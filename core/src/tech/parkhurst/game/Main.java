@@ -47,7 +47,7 @@ public class Main extends ApplicationAdapter {
 		// start the playback of the background music immediately
 		rainMusic.setLooping(true);
 		rainMusic.play();
-		rainMusic.setVolume(1);
+		rainMusic.setVolume(0);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class Main extends ApplicationAdapter {
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			camera.unproject(touchPos);
 			bucket.x = touchPos.x - 64 / 2;
-			bucket.y = touchPos.y - 64/2;
+			bucket.y = touchPos.y - 64 / 2;
 		}
 		//System.out.println(Gdx.graphics.getFramesPerSecond());
 		if(bucket.x < 0){
