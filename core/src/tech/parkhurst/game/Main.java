@@ -1,6 +1,6 @@
 package tech.parkhurst.game;
 //change music lets make an agario clone essentially
-
+import java.util.Random;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -18,9 +18,6 @@ public class Main extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Texture bucketImg;
 	private Texture drop;
-	private Sound dropSound;
-	private Music rainMusic;
-	private Sound gameMusic;
 
 	private Rectangle bucket;
 
@@ -30,10 +27,8 @@ public class Main extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 		batch = new SpriteBatch();
-		bucketImg = new Texture("./bucket.png");
+		bucketImg = new Texture("./circ.png");
 		drop = new Texture("./drop.png");
-		dropSound = Gdx.audio.newSound(Gdx.files.internal("raindrop.wav"));
-		rainMusic = Gdx.audio.newMusic(Gdx.files.internal("undertree.mp3"));
 		//gameMusic = Gdx.audio.newSound(Gdx.files.internal("gameMusic.wav"));
 		//Bucket
 		bucket = new Rectangle();
@@ -46,9 +41,6 @@ public class Main extends ApplicationAdapter {
 
 
 		// start the playback of the background music immediately
-		rainMusic.setLooping(true);
-		rainMusic.play();
-		rainMusic.setVolume(1);
 	}
 
 	@Override
@@ -61,6 +53,7 @@ public class Main extends ApplicationAdapter {
 		batch.end();
 
 		//Movement
+		/*
 		if(Gdx.input.isTouched()) {
 			Vector3 touchPos = new Vector3();
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -68,6 +61,12 @@ public class Main extends ApplicationAdapter {
 			bucket.x = touchPos.x - 64 / 2;
 			bucket.y = touchPos.y - 64 / 2;
 		}
+		 */
+		Vector3 touchPos = new Vector3();
+		touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+		camera.unproject(touchPos);
+		bucket.x = Gdx.input.getX() -64/2;
+		bucket.y= Gdx.input.getY() -64/2;
 		//System.out.println(Gdx.graphics.getFramesPerSecond());
 		if(bucket.x < 0){
 			bucket.x = 0;
@@ -86,8 +85,5 @@ public class Main extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		bucketImg.dispose();;
-		rainMusic.dispose();
-		gameMusic.dispose();
-		dropSound.dispose();
 	}
 }
