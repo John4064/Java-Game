@@ -33,7 +33,7 @@ public class Main extends ApplicationAdapter {
 		//Bucket
 		bucket = new Rectangle();
 		bucket.x = 800 / 2 - 64 / 2;
-		bucket.y = 20;
+		bucket.y = Gdx.input.getY();
 		bucket.width = 64;
 		bucket.height = 64;
 
@@ -66,7 +66,7 @@ public class Main extends ApplicationAdapter {
 		touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(touchPos);
 		bucket.x = Gdx.input.getX() -64/2;
-		bucket.y= Gdx.input.getY() -64/2;
+		bucket.y= Gdx.input.getY(0);
 		//System.out.println(Gdx.graphics.getFramesPerSecond());
 		if(bucket.x < 0){
 			bucket.x = 0;
