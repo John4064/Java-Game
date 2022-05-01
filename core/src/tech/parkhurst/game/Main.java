@@ -66,7 +66,7 @@ public class Main extends ApplicationAdapter {
 		touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 		camera.unproject(touchPos);
 		bucket.x = Gdx.input.getX() -64/2;
-		bucket.y= Gdx.input.getY(0);
+		bucket.y= 720-Gdx.input.getY()-32;
 		//System.out.println(Gdx.graphics.getFramesPerSecond());
 		if(bucket.x < 0){
 			bucket.x = 0;
