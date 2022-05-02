@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Player extends GameObject {
 
-    private Direction facing;
+    public Direction facing;
     public Texture img;
 
     public enum Direction{
@@ -17,13 +17,13 @@ public class Player extends GameObject {
      */
     public Player(int size) {
         //Setting Direction
-        facing = Direction.RIGHT;
+        facing = Direction.UP;
 
         //set WIDTH and HEIGHT
         width = height = size;
 
         //initial speed
-        speed = width;
+        speed = width/6;
 
         lives = 3;
         img = new Texture("./circ.png");

@@ -54,7 +54,17 @@ public class Main extends ApplicationAdapter {
 		batch.end();
 
 		//Get input here
+		//Depending on Direction move my player
+		if(MyPlayer.facing == Player.Direction.RIGHT){
+			MyPlayer.x += MyPlayer.width/MyPlayer.speed;
+		}else if(MyPlayer.facing == Player.Direction.LEFT){
+			MyPlayer.x -= MyPlayer.width/MyPlayer.speed;
+		}else if(MyPlayer.facing == Player.Direction.UP){
+			MyPlayer.y += MyPlayer.height/MyPlayer.speed;
+		}else if(MyPlayer.facing == Player.Direction.DOWN){
+			MyPlayer.y -= MyPlayer.height/MyPlayer.speed;
 
+		}
 
 
 		/*
