@@ -16,28 +16,28 @@ import com.badlogic.gdx.math.Rectangle;
 public class Main extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private Texture bucketImg;
+	private Texture playerImg;
 	private Texture drop;
 
-	private Rectangle bucket;
+	private Rectangle player;
 
+	private Player MyPlayer;
 
 	@Override
 	public void create () {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 		batch = new SpriteBatch();
-		bucketImg = new Texture("./circ.png");
-		drop = new Texture("./drop.png");
+		playerImg = new Texture("./circ.png");
 		//gameMusic = Gdx.audio.newSound(Gdx.files.internal("gameMusic.wav"));
 		//Bucket
-		bucket = new Rectangle();
-		bucket.x = 800 / 2 - 64 / 2;
-		bucket.y = Gdx.input.getY();
-		bucket.width = 64;
-		bucket.height = 64;
-
-
+		/*player = new Rectangle();
+		player.x = 300;
+		player.y = 300;
+		player.width = 32;
+		player.height = 32;
+		 */
+		MyPlayer = new Player(16);
 
 
 		// start the playback of the background music immediately
@@ -49,41 +49,32 @@ public class Main extends ApplicationAdapter {
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(bucketImg, bucket.x, bucket.y);
+		MyPlayer.render(batch);
+		//batch.draw(playerImg, player.x, player.y);
 		batch.end();
 
-		//Movement
-		/*
-		if(Gdx.input.isTouched()) {
-			Vector3 touchPos = new Vector3();
-			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-			camera.unproject(touchPos);
-			bucket.x = touchPos.x - 64 / 2;
-			bucket.y = touchPos.y - 64 / 2;
-		}
-		 */
-		Vector3 touchPos = new Vector3();
-		touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-		camera.unproject(touchPos);
-		bucket.x = Gdx.input.getX() -64/2;
-		bucket.y= 720-Gdx.input.getY()-32;
-		//System.out.println(Gdx.graphics.getFramesPerSecond());
-		if(bucket.x < 0){
-			bucket.x = 0;
-		}else if(bucket.x > 1280 - 64){
-			bucket.x = 1280 - 64;
-		}
-		if(bucket.y<0){
-			bucket.y = 0;
-		}else if(bucket.y > 720-64){
-			bucket.y= 720-64;
-		}
+		//Get input here
 
+
+
+		/*
+		//System.out.println(Gdx.graphics.getFramesPerSecond());
+		if(player.x < 0){
+			player.x = 0;
+		}else if(player.x > 1280 - 64){
+			player.x = 1280 - 64;
+		}
+		if(player.y<0){
+			player.y = 0;
+		}else if(player.y > 720-64){
+			player.y= 720-64;
+		}
+		*/
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		bucketImg.dispose();;
+		playerImg.dispose();;
 	}
 }
