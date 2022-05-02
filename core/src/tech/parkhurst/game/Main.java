@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -18,7 +19,7 @@ public class Main extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture playerImg;
-
+	private BitmapFont scoreText;
 	private Player MyPlayer;
 
 	private Target targ;
@@ -33,6 +34,7 @@ public class Main extends ApplicationAdapter {
 		//gameMusic = Gdx.audio.newSound(Gdx.files.internal("gameMusic.wav"));
 		MyPlayer = new Player(16);
 		targ = new Target();
+		scoreText = new BitmapFont(); //or use alex answer to use custom font
 
 		// start the playback of the background music immediately
 	}
@@ -56,11 +58,24 @@ public class Main extends ApplicationAdapter {
 		//Must Handle Rendering targets differently since new ones destroyed constantly potentially arraylist?
 		targ.render(batch);
 
+		//Score Text
+		scoreText.setColor(255,0,0,1);
+		scoreText.draw(batch, String.valueOf(MyPlayer.score), 32, 698);
 		batch.end();
 
-		//Handle our Input!
+		//Handle our Input!wda
 		MyPlayer.inputHandle();
 		//Check Here if MyPlayer touches targ
+
+
+		//REFINE THIS
+		if(MyPlayer.getX()+16>=targ.getX() && MyPlayer.getX()<=targ.getX()+16 && MyPlayer.getY()+16>=targ.getY()
+				&& MyPlayer.getY()<=targ.getY()+16){
+			//Delete target and creaate new
+
+			MyPlayer.score+=1;
+			targ.newloc();
+		}
 
 
 
@@ -88,6 +103,6 @@ public class Main extends ApplicationAdapter {
 		batch.dispose();
 		MyPlayer.disposeImg();
 		targ.disposeImg();
-
+		scoreText.dispose();
 	}
 }

@@ -19,4 +19,9 @@ public class Target extends GameObject {
         batch.draw(img, x, y);
     }
 
+    protected void newloc(){
+        x= (int) (Math.random()*(1260-16)+16);
+        y= (int) (Math.random()*(700-16)+16);
+    }
+
 }
