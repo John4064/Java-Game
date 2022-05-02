@@ -1,5 +1,5 @@
 package tech.parkhurst.game;
-//change music lets make an agario clone essentially
+//Basic Snake Game
 import java.util.Random;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -56,10 +56,12 @@ public class Main extends ApplicationAdapter {
 		//Get input here
 		//Depending on Direction move my player
 		if(MyPlayer.facing == Player.Direction.RIGHT){
+
 			MyPlayer.x += MyPlayer.width/MyPlayer.speed;
 		}else if(MyPlayer.facing == Player.Direction.LEFT){
 			MyPlayer.x -= MyPlayer.width/MyPlayer.speed;
 		}else if(MyPlayer.facing == Player.Direction.UP){
+			System.out.println(5);
 			MyPlayer.y += MyPlayer.height/MyPlayer.speed;
 		}else if(MyPlayer.facing == Player.Direction.DOWN){
 			MyPlayer.y -= MyPlayer.height/MyPlayer.speed;

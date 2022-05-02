@@ -8,6 +8,8 @@ public class Player extends GameObject {
     public Direction facing;
     public Texture img;
 
+    public int score;
+    
     public enum Direction{
         UP,DOWN,LEFT,RIGHT
     }
@@ -25,7 +27,6 @@ public class Player extends GameObject {
         //initial speed
         speed = width/6;
 
-        lives = 3;
         img = new Texture("./circ.png");
 
         reset();
