@@ -1,6 +1,7 @@
 package tech.parkhurst.game;
 //Basic Snake Game
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -18,23 +19,31 @@ import com.badlogic.gdx.math.Rectangle;
 public class Main extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private Texture playerImg;
 	private BitmapFont scoreText;
-	private Player MyPlayer;
-
+	private Player myPlayer;
+	private List<Wall> walls;
 	private Target targ;
+	private boolean isLive;
 
-	//Array List
+	private SpriteBatch endbatch;
+	private BitmapFont endText;
 
 	@Override
 	public void create () {
+		isLive = true;
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 		batch = new SpriteBatch();
 		//gameMusic = Gdx.audio.newSound(Gdx.files.internal("gameMusic.wav"));
-		MyPlayer = new Player(16);
+		myPlayer = new Player(16);
 		targ = new Target();
 		scoreText = new BitmapFont(); //or use alex answer to use custom font
+		walls = new ArrayList<Wall>();
+		//generate 4 walls
+		walls.add(new Wall(0,0,true));
+		walls.add(new Wall(1248,0,true));
+		walls.add(new Wall(0,0,false));
+		walls.add(new Wall(0,688,false));
 
 		// start the playback of the background music immediately
 	}
@@ -50,30 +59,45 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+		if(!isLive){
+			ScreenUtils.clear(255, 0, 0, 1);
+			endText = new BitmapFont();
+			endbatch = new SpriteBatch();
+			endbatch.begin();
+			scoreText.setColor(255,0,0,1);
+			scoreText.draw(endbatch, String.valueOf(myPlayer.score), 500, 500);
+			endbatch.end();
+		}
+
+
 		ScreenUtils.clear(0, 255, 0, 1);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		MyPlayer.render(batch);
-		//Must Handle Rendering targets differently since new ones destroyed constantly potentially arraylist?
+		//Unit Rendering
+		myPlayer.render(batch);
 		targ.render(batch);
+		//Wall Rendering
+		for(int i = 0; i < walls.size();i++){
+			walls.get(i).render(batch);
+		}
 
 		//Score Text
 		scoreText.setColor(255,0,0,1);
-		scoreText.draw(batch, String.valueOf(MyPlayer.score), 32, 698);
+		scoreText.draw(batch, String.valueOf(myPlayer.score), 64, 656);
 		batch.end();
 
 		//Handle our Input!wda
-		MyPlayer.inputHandle();
+		myPlayer.inputHandle();
 		//Check Here if MyPlayer touches targ
 
 
 		//REFINE THIS
-		if(MyPlayer.getX()+16>=targ.getX() && MyPlayer.getX()<=targ.getX()+16 && MyPlayer.getY()+16>=targ.getY()
-				&& MyPlayer.getY()<=targ.getY()+16){
+		if(myPlayer.getX()+16>=targ.getX() && myPlayer.getX()<=targ.getX()+16 && myPlayer.getY()+16>=targ.getY()
+				&& myPlayer.getY()<=targ.getY()+16){
 			//Delete target and creaate new
 
-			MyPlayer.score+=1;
+			myPlayer.score+=1;
 			targ.newloc();
 		}
 
@@ -81,18 +105,23 @@ public class Main extends ApplicationAdapter {
 
 		//Check if ESCape is pressed
 		escapeMenu();
-
+		System.out.println(isLive);
 			//DEAD CODE
 		//TEMPORARY TILL WE MAKE WALL OBJECT!
-		if(MyPlayer.x < 0){
-			MyPlayer.x = 0;
-		}else if(MyPlayer.x > 1280 - 32){
-			MyPlayer.x = 1280 - 32;
+		if(myPlayer.x < 30){
+			isLive=false;
+
+			myPlayer.x = 30;
+		}else if(myPlayer.x > 1280 - 62){
+			isLive=false;
+			myPlayer.x = 1280 - 62;
 		}
-		if(MyPlayer.y<0){
-			MyPlayer.y = 0;
-		}else if(MyPlayer.y > 720-32){
-			MyPlayer.y= 720-32;
+		if(myPlayer.y<30){
+			isLive=false;
+			myPlayer.y = 30;
+		}else if(myPlayer.y > 720-62){
+			isLive=false;
+			myPlayer.y= 720-62;
 		}
 
 	}
@@ -101,8 +130,12 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		MyPlayer.disposeImg();
+
+		myPlayer.disposeImg();
 		targ.disposeImg();
 		scoreText.dispose();
+		for(int i = 0; i < walls.size(); i++){
+			walls.get(i).disposeImg();
+		}
 	}
 }

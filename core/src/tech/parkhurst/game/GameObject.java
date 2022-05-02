@@ -1,6 +1,8 @@
 package tech.parkhurst.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.jetbrains.annotations.NotNull;
 
 public class GameObject {
 
@@ -39,6 +41,9 @@ public class GameObject {
 
     public void disposeImg(){
         img.dispose();
+    }
+    protected void render(@NotNull SpriteBatch batch){
+        batch.draw(img, x, y);
     }
 
 }

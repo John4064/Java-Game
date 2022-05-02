@@ -10,6 +10,7 @@ public class Player extends GameObject {
 
     public Direction facing;
 
+    public int length;
 
     public int score;
 
@@ -27,6 +28,9 @@ public class Player extends GameObject {
         //set WIDTH and HEIGHT
         width = height = size;
 
+        //Setting starter length
+        length=1;
+
         //initial speed
         speed = width/6;
 
@@ -34,7 +38,7 @@ public class Player extends GameObject {
 
         //reset();
     }
-
+    @Override
     protected void render(@NotNull SpriteBatch batch){
         batch.draw(img, x, y);
         //Handles our charachters movement

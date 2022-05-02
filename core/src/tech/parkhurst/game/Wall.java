@@ -1,6 +1,8 @@
 package tech.parkhurst.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.jetbrains.annotations.NotNull;
 
 public class Wall extends GameObject{
 
@@ -13,5 +15,7 @@ public class Wall extends GameObject{
             img = new Texture("./horizwall.png");
         }
     }
+
+
 
 }
