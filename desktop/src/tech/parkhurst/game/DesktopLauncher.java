@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("Tidal-Game");
+		config.setTitle("Snake-Game");
 		config.setResizable(false);
 		config.useVsync(true);
 		config.setWindowedMode(1280,720);

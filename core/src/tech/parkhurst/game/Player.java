@@ -1,12 +1,15 @@
 package tech.parkhurst.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import org.jetbrains.annotations.NotNull;
 
 public class Player extends GameObject {
 
     public Direction facing;
-    public Texture img;
+
 
     public int score;
 
@@ -32,17 +35,44 @@ public class Player extends GameObject {
         //reset();
     }
 
-    protected void render(SpriteBatch batch){
+    protected void render(@NotNull SpriteBatch batch){
         batch.draw(img, x, y);
+        //Handles our charachters movement
+        this.movement();
     }
 
-    /*
-    private void reset(){
-        facing = Direction.UP;
+
+
+    protected void inputHandle(){
+        /**
+         * @brief: This is whwere we handle the players input!
+         */
+        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+            this.facing = Direction.UP;
+        }else if(Gdx.input.isKeyPressed(Input.Keys.S)){
+            this.facing = Direction.DOWN;
+        }else if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            this.facing = Direction.LEFT;
+        }else if(Gdx.input.isKeyPressed(Input.Keys.D)){
+            this.facing = Direction.RIGHT;
+        }
     }
 
-*/
-    public void disposeImg(){
-        img.dispose();
+    private void movement(){
+        /**
+         * @brief: This Handles our automatic movement system based on the players speed/Direction facing
+         */
+        if(this.facing == Direction.RIGHT){
+            this.x += this.width/this.speed;
+        }else if(this.facing == Direction.LEFT){
+            this.x -= this.width/this.speed;
+        }else if(this.facing == Direction.UP){
+            this.y += this.height/this.speed;
+        }else if(this.facing == Direction.DOWN){
+            this.y -= this.height/this.speed;
+        }
+        return;
     }
+
+
 }

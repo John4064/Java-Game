@@ -1,12 +1,14 @@
 package tech.parkhurst.game;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public class GameObject {
 
     //Attributes
     float x;
     float y;
 
-    int lives;
+    public Texture img;
 
     float speed;
 
@@ -35,6 +37,8 @@ public class GameObject {
         return height;
     }
 
-
+    public void disposeImg(){
+        img.dispose();
+    }
 
 }
