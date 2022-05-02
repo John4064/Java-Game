@@ -9,7 +9,7 @@ public class Player extends GameObject {
     public Texture img;
 
     public int score;
-    
+
     public enum Direction{
         UP,DOWN,LEFT,RIGHT
     }
@@ -29,15 +29,20 @@ public class Player extends GameObject {
 
         img = new Texture("./circ.png");
 
-        reset();
+        //reset();
     }
 
     protected void render(SpriteBatch batch){
         batch.draw(img, x, y);
-        return;
     }
 
+    /*
     private void reset(){
-        facing = Direction.RIGHT;
+        facing = Direction.UP;
+    }
+
+*/
+    public void disposeImg(){
+        img.dispose();
     }
 }

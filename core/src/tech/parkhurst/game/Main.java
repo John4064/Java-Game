@@ -17,9 +17,6 @@ public class Main extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture playerImg;
-	private Texture drop;
-
-	private Rectangle player;
 
 	private Player MyPlayer;
 
@@ -28,15 +25,7 @@ public class Main extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 		batch = new SpriteBatch();
-		playerImg = new Texture("./circ.png");
 		//gameMusic = Gdx.audio.newSound(Gdx.files.internal("gameMusic.wav"));
-		//Bucket
-		/*player = new Rectangle();
-		player.x = 300;
-		player.y = 300;
-		player.width = 32;
-		player.height = 32;
-		 */
 		MyPlayer = new Player(16);
 
 
@@ -56,7 +45,6 @@ public class Main extends ApplicationAdapter {
 		//Get input here
 		//Depending on Direction move my player
 		if(MyPlayer.facing == Player.Direction.RIGHT){
-
 			MyPlayer.x += MyPlayer.width/MyPlayer.speed;
 		}else if(MyPlayer.facing == Player.Direction.LEFT){
 			MyPlayer.x -= MyPlayer.width/MyPlayer.speed;
@@ -69,24 +57,23 @@ public class Main extends ApplicationAdapter {
 		}
 
 
-		/*
-		//System.out.println(Gdx.graphics.getFramesPerSecond());
-		if(player.x < 0){
-			player.x = 0;
-		}else if(player.x > 1280 - 64){
-			player.x = 1280 - 64;
+			//PUT THIS IN A FUNCTION
+		if(MyPlayer.x < 0){
+			MyPlayer.x = 0;
+		}else if(MyPlayer.x > 1280 - 32){
+			MyPlayer.x = 1280 - 32;
 		}
-		if(player.y<0){
-			player.y = 0;
-		}else if(player.y > 720-64){
-			player.y= 720-64;
+		if(MyPlayer.y<0){
+			MyPlayer.y = 0;
+		}else if(MyPlayer.y > 720-32){
+			MyPlayer.y= 720-32;
 		}
-		*/
+
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		playerImg.dispose();;
+		MyPlayer.disposeImg();
 	}
 }
