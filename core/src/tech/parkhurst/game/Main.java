@@ -5,16 +5,15 @@ import java.util.List;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
+
 import com.badlogic.gdx.utils.ScreenUtils;
-// add this import and NOT the one in the standard library
-import com.badlogic.gdx.math.Rectangle;
+
+
+import tech.parkhurst.game.menus.EndScreen;
+
 
 public class Main extends ApplicationAdapter {
 	private OrthographicCamera camera;
@@ -104,16 +103,8 @@ public class Main extends ApplicationAdapter {
 				myPlayer.y = 720 - 62;
 			}
 		}else{
-			//End Game
-			ScreenUtils.clear(255, 0, 0, 1);
-			camera.update();
-			batch.setProjectionMatrix(camera.combined);
-			batch.begin();
-			//Score Text
-			scoreText.setColor(0, 0, 255, 1);
-			scoreText.getData().setScale(2);
-			scoreText.draw(batch, String.valueOf(myPlayer.score), 640, 360);
-			batch.end();
+			EndScreen.runScreen(camera,batch,scoreText, myPlayer.score);
+			escapeMenu();
 		}
 	}
 
