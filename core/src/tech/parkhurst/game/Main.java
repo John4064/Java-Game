@@ -25,8 +25,6 @@ public class Main extends ApplicationAdapter {
 	private Target targ;
 	private boolean isLive;
 
-	private SpriteBatch endbatch;
-	private BitmapFont endText;
 
 	@Override
 	public void create () {
@@ -59,17 +57,6 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		if(!isLive){
-			ScreenUtils.clear(255, 0, 0, 1);
-			endText = new BitmapFont();
-			endbatch = new SpriteBatch();
-			endbatch.begin();
-			scoreText.setColor(255,0,0,1);
-			scoreText.draw(endbatch, String.valueOf(myPlayer.score), 500, 500);
-			endbatch.end();
-		}
-
-
 		ScreenUtils.clear(0, 255, 0, 1);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
@@ -90,8 +77,6 @@ public class Main extends ApplicationAdapter {
 		//Handle our Input!wda
 		myPlayer.inputHandle();
 		//Check Here if MyPlayer touches targ
-
-
 		//REFINE THIS
 		if(myPlayer.getX()+16>=targ.getX() && myPlayer.getX()<=targ.getX()+16 && myPlayer.getY()+16>=targ.getY()
 				&& myPlayer.getY()<=targ.getY()+16){
@@ -101,29 +86,20 @@ public class Main extends ApplicationAdapter {
 			targ.newloc();
 		}
 
-
-
 		//Check if ESCape is pressed
 		escapeMenu();
-		System.out.println(isLive);
 			//DEAD CODE
 		//TEMPORARY TILL WE MAKE WALL OBJECT!
 		if(myPlayer.x < 30){
-			isLive=false;
-
 			myPlayer.x = 30;
 		}else if(myPlayer.x > 1280 - 62){
-			isLive=false;
 			myPlayer.x = 1280 - 62;
 		}
 		if(myPlayer.y<30){
-			isLive=false;
 			myPlayer.y = 30;
 		}else if(myPlayer.y > 720-62){
-			isLive=false;
 			myPlayer.y= 720-62;
 		}
-
 	}
 
 	
