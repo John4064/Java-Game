@@ -1,12 +1,13 @@
 package tech.parkhurst.game.menus;
 
+
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import org.jetbrains.annotations.NotNull;
 
-public class EndScreen {
+public class EndScreen extends Screen{
 
     public static void runScreen(@NotNull OrthographicCamera camera, @NotNull SpriteBatch batch, @NotNull BitmapFont scoreText, int score){
         //End Game

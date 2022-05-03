@@ -103,6 +103,7 @@ public class Main extends ApplicationAdapter {
 				myPlayer.y = 720 - 62;
 			}
 		}else{
+			//Possibly Consider refactoring to package these into a struct
 			EndScreen.runScreen(camera,batch,scoreText, myPlayer.score);
 			escapeMenu();
 		}
