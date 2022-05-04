@@ -24,7 +24,8 @@ public class Player extends GameObject {
     public Player(int size) {
         //Setting Direction
         facing = Direction.UP;
-
+        x=400;
+        y=400;
         //set WIDTH and HEIGHT
         width = height = size;
 
